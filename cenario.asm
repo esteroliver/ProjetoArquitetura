@@ -1,12 +1,12 @@
 .text
-# degradê | cenário 4x4
+# degradï¿½ | cenï¿½rio 4x4
 # 0x92cade
 # 0xa6d6e4
 #0xcee7f3
 main:
 	lui $8, 0x1001
 	
-	addi $9, $0, 0x92cade #cor mais escura do céu
+	addi $9, $0, 0x92cade #cor mais escura do cï¿½u
 	addi $11, $0,2560
 for1:
 	beq $11, $0, fim1
@@ -17,7 +17,7 @@ for1:
 	
 	j for1
 fim1:
-	addi $11, $0, 1664 #cor média do céu
+	addi $11, $0, 1664 #cor mï¿½dia do cï¿½u
 	addi $9, $0, 0xa6d6e4
 for2:
 	beq $11, $0, fim2
@@ -28,14 +28,14 @@ for2:
 	
 	j for2
 fim2:	
-	addi $11, $0, 2176 # cor clara do céu
-	# três últimas linhas da cor clara do céu
+	addi $11, $0, 2176 # cor clara do cï¿½u
+	# trï¿½s ï¿½ltimas linhas da cor clara do cï¿½u
 	addi $12, $0, 383 #linha3
 	addi $13, $0, 255 #linha2
 	addi $14, $0, 127 #linha1
 	
 for3:
-	addi $9, $0,0xcee7f3 # as três últimas linhas da cor clara do céu, serão utilizadas para desenhar a grama
+	addi $9, $0,0xcee7f3 # as trï¿½s ï¿½ltimas linhas da cor clara do cï¿½u, serï¿½o utilizadas para desenhar a grama
 	beq $11, $0, fim3
 	addi $11, $11, -1
 	
