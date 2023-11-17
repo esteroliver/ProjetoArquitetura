@@ -26,7 +26,7 @@ azulmedio:
 
 fim_azulmedio:
 	addi $10, $0, 2176
-	addi $11, $0, 283
+	addi $11, $0, 383
 	addi $12, $0, 255
 	addi $13, $0, 127
 

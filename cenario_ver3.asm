@@ -1,0 +1,216 @@
+.text
+main:
+	lui $8, 0x1001
+	addi $9, $0, 0x92cade # cor mais escura do céu
+	addi $10, $0, 2560
+azulescuro:
+	beq $10, $0, fim_azulescuro
+	addi $10, $10, -1
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	j azulescuro
+	
+fim_azulescuro:
+	addi $9, $0, 0xa6d6e4 # cor média do céu
+	addi $10, $0, 1664
+azulmedio:
+	beq $10, $0, fim_azulmedio
+	addi $10, $10, -1
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	j azulmedio
+
+fim_azulmedio:
+	addi $10, $0, 2176
+	addi $11, $0, 383
+	addi $12, $0, 255
+	addi $13, $0, 127
+
+azulclaro:
+	addi $9, $0, 0xcee7f3 # cor clara do céu
+	# foi colocado no for azul claro ao invés do fim_azulmedio, pois haverá variação dos pixels para fazer a grama
+	beq $10, $0, fim_ceu
+	addi $10, $10, -1
+	# há 3 linhas para a grama
+	# linha 1 só há 1 pixel
+	# linha 2 há dois pixels
+	# linha 3 têm 4 pixels
+	#   *
+	#  **
+	# ****
+	beq $10, $11, linha1
+	beq $10, $12, linha2
+	beq $10, $13, linha3
+continue_azul:
+	beq $14, $10, pintar_verde
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	j azulclaro
+linha1:
+	addi $14, $0, 380 # pixel da linha 1
+	j continue_azul
+linha2:
+	addi $14, $0, 253 # pixel da linha 2
+	j continue_azul
+linha3:
+	addi $14, $0, 126 # pixel da linha 3
+	j continue_azul
+pintar_verde:
+	addi $9, $0,0x477d46
+	
+	slt $15, $14, $11
+	slt $16, $12, $14
+	beq $15, $16, pintar_linha1
+	
+	slt $15, $14, $12
+	slt $16, $13, $14
+	beq $15, $16, pintar_linha2
+	
+	slt $15, $14, $13
+	slt $16, $0, $14
+	beq $15, $16, pintar_linha3
+# laços para pintar a grama
+pintar_linha1:
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $14, $14, -6
+	j azulclaro
+pintar_linha2:
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $10, $10, -1
+	addi $14, $14, -6
+	j azulclaro
+pintar_linha3:
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $10, $10, -3
+	addi $14, $14, -6
+	j azulclaro
+fim_ceu:
+	addi $10, $0, 128
+	addi $9, $0,0x477d46
+gramaescura:
+	#linha da grama escura
+	beq $10, $0, fim_gramaescura
+	addi $10, $10, -1
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	j gramaescura
+fim_gramaescura:
+	addi $10, $0, 384
+	addi $9, $0,0x42ad4b
+gramaclara:
+	#linha da grama clara
+	beq $10, $0, fim_gramaclara
+	addi $10, $10, -1
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	j gramaclara
+fim_gramaclara:
+	addi $10, $0,1408
+	addi $9, $0, 0x8c8c8c
+pedra:
+	#linhas do chão
+	beq $10, $0, estilingue
+	addi $10, $10, -1
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	j pedra
+# a partir daqui, é feita a implementação do estilingue
+#TO DO
+# - Linhas na diagonal
+# - Base do estilingue
+# - Consertar as cores do céu
+estilingue:
+	lui $8, 0x1001
+	addi $12, $0, 3200
+	addi $13, $0, 1782
+	
+	addi $10, $0, 6400 # linha do início
+	addi $11, $0, 3200 # linha do final
+	addi $14, $0, 6399 # contador para realizar os laços
+topo_estilingue:
+	beq $12, $0, fim_topo
+	addi $12, $12, -1
+	
+	slt $16, $14, $10
+	slt $15, $11, $14
+	beq $15, $16, pintar # se o $14 estiver entre o $10 e o $11, ele entrará no laço pintar
+continue:
+	addi $9, $0,  0xa6d6e4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	j topo_estilingue
+pintar:
+	beq $13, $12, pintar_estilingue # se o $12 chegar na posição do $13, ele começa a pintar o estilingue
+	addi $14, $14, -1
+	j continue
+pintar_estilingue:
+	# nesse laço a base do estilingue é feita, linha por linha
+	addi $9, $0, 0x9c5a3c
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	addi $9, $0, 0xa6d6e4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	addi $9, $0, 0x9c5a3c
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	addi $13, $13, -128
+	addi $12, $12, -14
+	addi $14, $14, -15
+	j topo_estilingue
+fim_topo:
+# INICIAR AS DIAGONAIS DO ESTILINGUE AQUI
+	
+fim_cenario:
+	addi $2, $0, 10
+	syscall
