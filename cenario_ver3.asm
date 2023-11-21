@@ -1,38 +1,25 @@
 .text
 main:
 	lui $8, 0x1001
-	addi $9, $0, 0x92cade # cor mais escura do céu
-	addi $10, $0, 2560
-azulescuro:
-	beq $10, $0, fim_azulescuro
+	addi $9, $0, 0xa6d6e4 # cor do céu
+	addi $10, $0, 6016
+azul:
+	beq $10, $0, fim_azul
 	addi $10, $10, -1
 	
 	sw $9, 0($8)
 	addi $8, $8, 4
 	
-	j azulescuro
+	j azul
 	
-fim_azulescuro:
-	addi $9, $0, 0xa6d6e4 # cor média do céu
-	addi $10, $0, 1664
-azulmedio:
-	beq $10, $0, fim_azulmedio
-	addi $10, $10, -1
-	
-	sw $9, 0($8)
-	addi $8, $8, 4
-	
-	j azulmedio
-
-fim_azulmedio:
-	addi $10, $0, 2176
+fim_azul:
+	addi $10, $0, 384
 	addi $11, $0, 383
 	addi $12, $0, 255
 	addi $13, $0, 127
 
-azulclaro:
-	addi $9, $0, 0xcee7f3 # cor clara do céu
-	# foi colocado no for azul claro ao invés do fim_azulmedio, pois haverá variação dos pixels para fazer a grama
+ceu_grama:
+	addi $9, $0, 0xa6d6e4 # cor do céu
 	beq $10, $0, fim_ceu
 	addi $10, $10, -1
 	# há 3 linhas para a grama
@@ -51,7 +38,7 @@ continue_azul:
 	sw $9, 0($8)
 	addi $8, $8, 4
 	
-	j azulclaro
+	j ceu_grama
 linha1:
 	addi $14, $0, 380 # pixel da linha 1
 	j continue_azul
@@ -81,7 +68,7 @@ pintar_linha1:
 	addi $8, $8, 4
 	
 	addi $14, $14, -6
-	j azulclaro
+	j ceu_grama
 pintar_linha2:
 	sw $9, 0($8)
 	addi $8, $8, 4
@@ -90,7 +77,7 @@ pintar_linha2:
 	
 	addi $10, $10, -1
 	addi $14, $14, -6
-	j azulclaro
+	j ceu_grama
 pintar_linha3:
 	sw $9, 0($8)
 	addi $8, $8, 4
@@ -103,7 +90,7 @@ pintar_linha3:
 	
 	addi $10, $10, -3
 	addi $14, $14, -6
-	j azulclaro
+	j ceu_grama
 fim_ceu:
 	addi $10, $0, 128
 	addi $9, $0,0x477d46
@@ -142,9 +129,7 @@ pedra:
 	j pedra
 # a partir daqui, é feita a implementação do estilingue
 #TO DO
-# - Linhas na diagonal
 # - Base do estilingue
-# - Consertar as cores do céu
 estilingue:
 	lui $8, 0x1001
 	addi $12, $0, 3200
@@ -358,6 +343,8 @@ pintar_diagonal_l4:
 	addi $15, $15, -9
 	j diagonal
 fim_diagonal:
+# INICIAR A BASE DO ESTILINGUE AQUI
+
 fim_cenario:
 	addi $2, $0, 10
 	syscall
