@@ -159,17 +159,17 @@ topo_estilingue:
 	
 	slt $16, $14, $10
 	slt $15, $11, $14
-	beq $15, $16, pintar # se o $14 estiver entre o $10 e o $11, ele entrará no laço pintar
-continue:
+	beq $15, $16, pintar_topo # se o $14 estiver entre o $10 e o $11, ele entrará no laço pintar
+continue_topo:
 	addi $9, $0,  0xa6d6e4
 	sw $9, 0($8)
 	addi $8, $8, 4
 	j topo_estilingue
-pintar:
-	beq $13, $12, pintar_estilingue # se o $12 chegar na posição do $13, ele começa a pintar o estilingue
+pintar_topo:
+	beq $13, $12, pintar_estilingue_topo # se o $12 chegar na posição do $13, ele começa a pintar o estilingue
 	addi $14, $14, -1
-	j continue
-pintar_estilingue:
+	j continue_topo
+pintar_estilingue_topo:
 	# nesse laço a base do estilingue é feita, linha por linha
 	addi $9, $0, 0x9c5a3c
 	sw $9, 0($8)
@@ -210,7 +210,154 @@ pintar_estilingue:
 	j topo_estilingue
 fim_topo:
 # INICIAR AS DIAGONAIS DO ESTILINGUE AQUI
+	addi $10, $0, 4855
+	addi $11, $0, 4726
+	addi $12, $0, 4597
+	addi $13, $0, 4468
 	
+	addi $14, $0, 512
+	addi $15, $0, 4864
+diagonal:
+	beq $14, $0, fim_diagonal
+	addi $14, $14, -1
+	
+	beq $10, $15, pintar_diagonal_l1
+	beq $11, $15, pintar_diagonal_l2
+	beq $12, $15, pintar_diagonal_l3
+	beq $13, $15, pintar_diagonal_l4
+	
+	addi $15, $15, -1
+	addi $9, $0, 0xa6d6e4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	j diagonal
+pintar_diagonal_l1:
+	addi $9, $0, 0x9c5a3c
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	addi $9, $0, 0xa6d6e4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	addi $9, $0, 0x9c5a3c
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $14, $14, -14
+	addi $15, $15, -15
+	j diagonal
+pintar_diagonal_l2:
+	addi $9, $0, 0x9c5a3c
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	addi $9, $0, 0xa6d6e4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	addi $9, $0, 0x9c5a3c
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $14, $14, -12
+	addi $15, $15, -13
+	j diagonal
+pintar_diagonal_l3:
+	addi $9, $0, 0x9c5a3c
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	addi $9, $0, 0xa6d6e4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	addi $9, $0, 0x9c5a3c
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $14, $14, -10
+	addi $15, $15, -11
+	j diagonal
+pintar_diagonal_l4:
+	addi $9, $0, 0x9c5a3c
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $14, $14, -8
+	addi $15, $15, -9
+	j diagonal
+fim_diagonal:
 fim_cenario:
 	addi $2, $0, 10
 	syscall
