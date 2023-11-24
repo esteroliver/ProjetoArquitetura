@@ -349,7 +349,7 @@ fim_diagonal:
 	addi $11, $0, 2288
 	
 base_estilingue:
-	beq $10, $0, fim_cenario
+	beq $10, $0, final_base
 	addi $10, $10, -1
 	
 	beq $11, $10, pintar_base
@@ -369,6 +369,44 @@ pintar_base:
 	addi $10, $10, -2
 	addi $11, $11, -128
 	j base_estilingue
+final_base:
+	addi $8, $8, 60
+	
+	addi $9, $0, 0x9c5a3c
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $8, $8, 500
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $8, $8, 500
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $8, $8, 500
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
 	
 fim_cenario:
 	addi $2, $0, 10
