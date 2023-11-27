@@ -1,4 +1,8 @@
 .text
+# degradê | cenário 4x4
+# 0x92cade
+# 0xa6d6e4
+#0xcee7f3
 main:
 	lui $8, 0x1001
 	addi $9, $0, 0xa6d6e4 # cor do céu
@@ -527,7 +531,6 @@ pes_flat:
 	sw $9, 0($8)
 	
 	j pes_flat
-	
 fim_cenario:
 	addi $2, $0, 10
 	syscall

@@ -1,83 +1,88 @@
-.text
 main:
 	lui $8, 0x1001
-	addi $9, $0, 0xa6d6e4 # cor do céu
-	addi $10, $0, 6016
-azul:
-	beq $10, $0, fim_azul
+	addi $9, $0, 0x92cade
+	addi $10, $0, 3072
+azulescuro:
+	beq $10, $0, fim_azulescuro
 	addi $10, $10, -1
-	
+
 	sw $9, 0($8)
 	addi $8, $8, 4
-	
-	j azul
-	
-fim_azul:
-	addi $10, $0, 384
+
+	j azulescuro
+
+fim_azulescuro:
+	addi $9, $0, 0xa6d6e4
+	addi $10, $0, 1792
+azulmedio:
+	beq $10, $0, fim_azulmedio
+	addi $10, $10, -1
+
+	sw $9, 0($8)
+	addi $8, $8, 4
+
+	j azulmedio
+
+fim_azulmedio:
+	addi $10, $0, 2176
 	addi $11, $0, 383
 	addi $12, $0, 255
 	addi $13, $0, 127
 
-ceu_grama:
-	addi $9, $0, 0xa6d6e4 # cor do céu
+azulclaro:
+	addi $9, $0, 0xcee7f3
 	beq $10, $0, fim_ceu
 	addi $10, $10, -1
-	# há 3 linhas para a grama
-	# linha 1 só há 1 pixel
-	# linha 2 há dois pixels
-	# linha 3 têm 4 pixels
-	#   *
-	#  **
-	# ****
+
 	beq $10, $11, linha1
 	beq $10, $12, linha2
 	beq $10, $13, linha3
 continue_azul:
 	beq $14, $10, pintar_verde
-	
+
 	sw $9, 0($8)
 	addi $8, $8, 4
-	
-	j ceu_grama
+
+	j azulclaro
 linha1:
-	addi $14, $0, 380 # pixel da linha 1
+	addi $14, $0, 380
 	j continue_azul
 linha2:
-	addi $14, $0, 253 # pixel da linha 2
+	addi $14, $0, 253
 	j continue_azul
 linha3:
-	addi $14, $0, 126 # pixel da linha 3
+	addi $14, $0, 126
 	j continue_azul
 pintar_verde:
 	addi $9, $0,0x477d46
-	
+
 	slt $15, $14, $11
 	slt $16, $12, $14
 	beq $15, $16, pintar_linha1
-	
+
 	slt $15, $14, $12
 	slt $16, $13, $14
 	beq $15, $16, pintar_linha2
-	
+
 	slt $15, $14, $13
 	slt $16, $0, $14
 	beq $15, $16, pintar_linha3
-# laços para pintar a grama
+
 pintar_linha1:
 	sw $9, 0($8)
 	addi $8, $8, 4
-	
+
 	addi $14, $14, -6
-	j ceu_grama
+	j azulclaro
 pintar_linha2:
 	sw $9, 0($8)
 	addi $8, $8, 4
 	sw $9, 0($8)
 	addi $8, $8, 4
-	
+
 	addi $10, $10, -1
 	addi $14, $14, -6
-	j ceu_grama
+	j azulclaro
 pintar_linha3:
 	sw $9, 0($8)
 	addi $8, $8, 4
@@ -87,135 +92,77 @@ pintar_linha3:
 	addi $8, $8, 4
 	sw $9, 0($8)
 	addi $8, $8, 4
-	
+
 	addi $10, $10, -3
 	addi $14, $14, -6
-	j ceu_grama
+	j azulclaro
 fim_ceu:
 	addi $10, $0, 128
 	addi $9, $0,0x477d46
 gramaescura:
-	#linha da grama escura
 	beq $10, $0, fim_gramaescura
 	addi $10, $10, -1
-	
+
 	sw $9, 0($8)
 	addi $8, $8, 4
-	
+
 	j gramaescura
 fim_gramaescura:
 	addi $10, $0, 384
 	addi $9, $0,0x42ad4b
 gramaclara:
-	#linha da grama clara
 	beq $10, $0, fim_gramaclara
 	addi $10, $10, -1
-	
+
 	sw $9, 0($8)
 	addi $8, $8, 4
-	
+
 	j gramaclara
 fim_gramaclara:
 	addi $10, $0,1408
 	addi $9, $0, 0x8c8c8c
 pedra:
-	#linhas do chão
 	beq $10, $0, estilingue
+	addi $10, $10, -1
+
+	sw $9, 0($8)
+	addi $8, $8, 4
+
+	j pedra
+	
+estilingue:
+	lui $8, 0x1001
+	addi $8, $8, 10280
+	addi $9, $0, 0x9c5a3c
+	
+	addi $10, $0, 12
+topo_estilingue:	
+	beq $10, $0, estilingue_diagonais
 	addi $10, $10, -1
 	
 	sw $9, 0($8)
 	addi $8, $8, 4
-	
-	j pedra
-# a partir daqui, é feita a implementação do estilingue
-#TO DO
-# - Base do estilingue
-estilingue:
-	lui $8, 0x1001
-	addi $12, $0, 3200
-	addi $13, $0, 1782
-	
-	addi $10, $0, 6400 # linha do início
-	addi $11, $0, 3200 # linha do final
-	addi $14, $0, 6399 # contador para realizar os laços
-topo_estilingue:
-	beq $12, $0, fim_topo
-	addi $12, $12, -1
-	
-	slt $16, $14, $10
-	slt $15, $11, $14
-	beq $15, $16, pintar_topo # se o $14 estiver entre o $10 e o $11, ele entrará no laço pintar
-continue_topo:
-	addi $9, $0,  0xa6d6e4
 	sw $9, 0($8)
 	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $8, $8, 36
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $8, $8, 452
 	j topo_estilingue
-pintar_topo:
-	beq $13, $12, pintar_estilingue_topo # se o $12 chegar na posição do $13, ele começa a pintar o estilingue
-	addi $14, $14, -1
-	j continue_topo
-pintar_estilingue_topo:
-	# nesse laço a base do estilingue é feita, linha por linha
-	addi $9, $0, 0x9c5a3c
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	addi $9, $0, 0xa6d6e4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	addi $9, $0, 0x9c5a3c
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	addi $13, $13, -128
-	addi $12, $12, -14
-	addi $14, $14, -15
-	j topo_estilingue
-fim_topo:
+	
+estilingue_diagonais:
 # INICIAR AS DIAGONAIS DO ESTILINGUE AQUI
-	addi $10, $0, 4855
-	addi $11, $0, 4726
-	addi $12, $0, 4597
-	addi $13, $0, 4468
-	
-	addi $14, $0, 512
-	addi $15, $0, 4864
+	addi $10, $0, 5
 diagonal:
-	beq $14, $0, fim_diagonal
-	addi $14, $14, -1
-	
-	beq $10, $15, pintar_diagonal_l1
-	beq $11, $15, pintar_diagonal_l2
-	beq $12, $15, pintar_diagonal_l3
-	beq $13, $15, pintar_diagonal_l4
-	
-	addi $15, $15, -1
-	addi $9, $0, 0xa6d6e4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	j diagonal
 pintar_diagonal_l1:
 	addi $9, $0, 0x9c5a3c
 	sw $9, 0($8)
@@ -226,70 +173,9 @@ pintar_diagonal_l1:
 	addi $8, $8, 4
 	sw $9, 0($8)
 	addi $8, $8, 4
-	addi $9, $0, 0xa6d6e4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	addi $9, $0, 0x9c5a3c
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
 	
-	addi $14, $14, -14
-	addi $15, $15, -15
-	j diagonal
-pintar_diagonal_l2:
-	addi $9, $0, 0x9c5a3c
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	addi $9, $0, 0xa6d6e4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	addi $9, $0, 0x9c5a3c
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
+	addi $8, $8, 28
 	
-	addi $14, $14, -12
-	addi $15, $15, -13
-	j diagonal
-pintar_diagonal_l3:
-	addi $9, $0, 0x9c5a3c
 	sw $9, 0($8)
 	addi $8, $8, 4
 	sw $9, 0($8)
@@ -298,53 +184,209 @@ pintar_diagonal_l3:
 	addi $8, $8, 4
 	sw $9, 0($8)
 	addi $8, $8, 4
-	addi $9, $0, 0xa6d6e4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	addi $9, $0, 0x9c5a3c
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	
-	addi $14, $14, -10
-	addi $15, $15, -11
-	j diagonal
-pintar_diagonal_l4:
-	addi $9, $0, 0x9c5a3c
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	sw $9, 0($8)
-	addi $8, $8, 4
-	
-	addi $14, $14, -8
-	addi $15, $15, -9
-	j diagonal
-fim_diagonal:
-# INICIAR A BASE DO ESTILINGUE AQUI
 
+	addi $8, $8, 456
+pintar_diagonal_l2:
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $8, $8, 20
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $8, $8, 464
+pintar_diagonal_l3:
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $8, $8, 12
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $8, $8, 472
+	
+pintar_diagonal_l4:
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	
+fim_diagonal:
+	addi $10, $0, 19
+	addi $8, $8, 492
+base_estilingue_sombra:
+	addi $9, $0, 0x593608
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	addi $9, $0, 0x9c5a3c
+	addi $8, $8, 500
+base_estilingue:
+	beq $10, $0, base_porco_1
+	addi $10, $10, -1
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $8, $8, 500
+	
+	j base_estilingue
+	
+base_porco_1:
+	lui $8, 0x1001
+	addi $8, $8, 16732
+	
+	addi $9, $0, 0x787878
+	
+	addi $10, $0, 35
+	
+base_porco_l1:
+	beq $10, $0, base_porco_2
+	addi $10, $10, -1
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	j base_porco_l1
+base_porco_2:
+	addi $8, $8, 372
+	addi $10, $0, 35
+base_porco_l2:
+	beq $10, $0, base_porco_3
+	addi $10, $10, -1
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	j base_porco_l2
+base_porco_3:
+	addi $8, $8, 376
+	addi $10, $10, 33
+base_porco_l3:
+	beq $10, $0, base_porco_4
+	addi $10, $10, -1
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	j base_porco_l3
+base_porco_4:
+	addi $8, $8, 384
+	addi $10, $10, 31
+base_porco_l4:
+	beq $10, $0, pes
+	addi $10, $10, -1
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	j base_porco_l4
+pes:
+	addi $9, $0, 0x404040
+	addi $8, $8, 392
+pes_sombra:
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $8, $8, 76
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	
+	addi $10, $0, 19
+	addi $9, $0, 0x787878
+pes_flat:
+	beq $10, $0, fim_cenario
+	addi $10, $10, -1
+	
+	addi $8, $8, 400
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $8, $8, 76
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	
+	j pes_flat
+	
 fim_cenario:
 	addi $2, $0, 10
-	syscall
+	syscall 
