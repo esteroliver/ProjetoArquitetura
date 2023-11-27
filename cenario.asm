@@ -407,6 +407,126 @@ final_base:
 	addi $8, $8, 4
 	sw $9, 0($8)
 	addi $8, $8, 4
+sombra:
+	lui $8, 0x1001
+	addi $9, $0, 0x593608
+	
+	addi $8, $8, 17964
+	addi $8, $8, 16
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+base_porco_1:
+	lui $8, 0x1001
+	addi $8, $8, 16732
+	
+	addi $9, $0, 0x999999
+	
+	addi $10, $0, 35
+	
+base_porco_l1:
+	beq $10, $0, base_porco_2
+	addi $10, $10, -1
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	j base_porco_l1
+base_porco_2:
+	addi $8, $8, 372
+	addi $10, $0, 35
+base_porco_l2:
+	beq $10, $0, base_porco_3
+	addi $10, $10, -1
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	j base_porco_l2
+base_porco_3:
+	addi $8, $8, 376
+	addi $10, $10, 33
+base_porco_l3:
+	beq $10, $0, base_porco_4
+	addi $10, $10, -1
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	j base_porco_l3
+base_porco_4:
+	addi $8, $8, 384
+	addi $10, $10, 31
+base_porco_l4:
+	beq $10, $0, pes
+	addi $10, $10, -1
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	j base_porco_l4
+pes:
+	addi $9, $0, 0x666666
+	addi $8, $8, 392
+pes_sombra:
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $8, $8, 76
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	
+	addi $10, $0, 19
+	addi $9, $0, 0x999999
+pes_flat:
+	beq $10, $0, fim_cenario
+	addi $10, $10, -1
+	
+	addi $8, $8, 400
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	
+	addi $8, $8, 76
+	
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	addi $8, $8, 4
+	sw $9, 0($8)
+	
+	j pes_flat
 	
 fim_cenario:
 	addi $2, $0, 10
