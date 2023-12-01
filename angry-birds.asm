@@ -399,6 +399,8 @@ for_shadow:
 	j for_shadow
 porco:
 bne $0, $0, fim_jogo
+#IF PARA PARAR O JOGO QUANDO O PÁSSARO SE MEXER
+
 #INICIAR A ANIMAÇÃO DO NPC AQUI
 	#16220
 	lui $8, 0x1001
@@ -592,6 +594,20 @@ bne $0, $0, fim_jogo
 	sw $9, 11600($8)
 	addi $8, $8, 32
 	sw $9, 11600($8)
+	
+#------------------------
+#       DELAY
+delay:
+	addi $20, $0, 200000
+for_delay:
+	beq $20, $0, fim_delay
+	nop
+	addi $20, $20, -1
+	j for_delay
+fim_delay:
+	jr $31
+#------------------------
+
 fim_jogo:
 	addi $2, $0, 10
 	syscall 
