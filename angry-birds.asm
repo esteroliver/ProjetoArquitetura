@@ -398,6 +398,7 @@ for_shadow:
 	addi $8, $8, 4
 	j for_shadow
 porco:
+bne $0, $0, fim_jogo
 #INICIAR A ANIMAÇÃO DO NPC AQUI
 	#16220
 	lui $8, 0x1001
@@ -591,6 +592,6 @@ porco:
 	sw $9, 11600($8)
 	addi $8, $8, 32
 	sw $9, 11600($8)
-fim_cenario:
+fim_jogo:
 	addi $2, $0, 10
 	syscall 
