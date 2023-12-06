@@ -390,6 +390,8 @@ pes_flat:
 shadow:
 #A SHADOW É FEITA A PARTIR DAQUI
 	lui $8, 0x1001
+	lui $11, 0xffff
+	addi $13, $0, 0
 	addi $10, $0, 8192
 for_shadow:
 	beq $10, $0, animacao
@@ -398,6 +400,10 @@ for_shadow:
 	sw $9, 32768($8)
 	addi $8, $8, 4
 	j for_shadow
+personagem:
+	addi $4, $0, 0
+	addi $5, $0, 0
+	jal passaro
 animacao:
 	addi $4, $0, 0
 	addi $5, $0, 0
@@ -406,6 +412,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 4
 	addi $5, $0, 4
@@ -414,6 +422,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 8
 	addi $5, $0, 8
@@ -422,6 +432,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 12
 	addi $5, $0, 12
@@ -430,6 +442,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 16
 	addi $5, $0, 16
@@ -438,6 +452,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 20
 	addi $5, $0, 20
@@ -446,6 +462,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 24
 	addi $5, $0, 24
@@ -454,6 +472,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 28
 	addi $5, $0, 28
@@ -462,6 +482,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 32
 	addi $5, $0, 32
@@ -470,6 +492,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 36
 	addi $5, $0, 36
@@ -478,6 +502,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 40
 	addi $5, $0, 40
@@ -486,6 +512,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 44
 	addi $5, $0, 44
@@ -494,6 +522,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 48
 	addi $5, $0, 48
@@ -502,6 +532,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 52
 	addi $5, $0, 52
@@ -510,6 +542,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 56
 	addi $5, $0, 56
@@ -518,6 +552,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 60
 	addi $5, $0, 60
@@ -526,6 +562,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 64
 	addi $5, $0, 64
@@ -534,6 +572,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 68
 	addi $5, $0, 68
@@ -542,6 +582,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 72
 	addi $5, $0, 72
@@ -550,6 +592,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 76
 	addi $5, $0, 76
@@ -558,6 +602,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 80
 	addi $5, $0, 80
@@ -566,6 +612,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 84
 	addi $5, $0, 84
@@ -574,6 +622,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 88
 	addi $5, $0, 88
@@ -582,6 +632,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 92
 	addi $5, $0, 92
@@ -590,6 +642,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 96
 	addi $5, $0, 96
@@ -598,6 +652,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 100
 	addi $5, $0, 100
@@ -606,6 +662,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 104
 	addi $5, $0, 104
@@ -614,6 +672,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 108
 	addi $5, $0, 108
@@ -622,6 +682,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 112
 	addi $5, $0, 112
@@ -630,6 +692,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 116
 	addi $5, $0, 116
@@ -638,6 +702,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 120
 	addi $5, $0, 120
@@ -646,6 +712,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 124
 	addi $5, $0, 124
@@ -654,6 +722,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 128
 	addi $5, $0, 128
@@ -662,6 +732,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_indo
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	#voltando
 	addi $4, $0, 128
 	addi $5, $0, 4
@@ -670,6 +742,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 124
 	addi $5, $0, 8
@@ -678,6 +752,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 120
 	addi $5, $0, 12
@@ -686,6 +762,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 116
 	addi $5, $0, 16
@@ -694,6 +772,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 112
 	addi $5, $0, 20
@@ -702,6 +782,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 108
 	addi $5, $0, 24
@@ -710,6 +792,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 104
 	addi $5, $0, 28
@@ -718,6 +802,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 100
 	addi $5, $0, 32
@@ -726,6 +812,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 96
 	addi $5, $0, 36
@@ -734,6 +822,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 92
 	addi $5, $0, 40
@@ -742,6 +832,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 88
 	addi $5, $0, 44
@@ -750,6 +842,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 84
 	addi $5, $0, 48
@@ -758,6 +852,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 80
 	addi $5, $0, 52
@@ -766,6 +862,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 76
 	addi $5, $0, 56
@@ -774,6 +872,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 72
 	addi $5, $0, 60
@@ -782,6 +882,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 68
 	addi $5, $0, 64
@@ -790,6 +892,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 64
 	addi $5, $0, 68
@@ -798,6 +902,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 60
 	addi $5, $0, 72
@@ -806,6 +912,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 56
 	addi $5, $0, 76
@@ -814,6 +922,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 52
 	addi $5, $0, 80
@@ -822,6 +932,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 48
 	addi $5, $0, 84
@@ -830,6 +942,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 44
 	addi $5, $0, 88
@@ -838,6 +952,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 40
 	addi $5, $0, 92
@@ -846,6 +962,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 36
 	addi $5, $0, 96
@@ -854,6 +972,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 32
 	addi $5, $0, 100
@@ -862,6 +982,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 28
 	addi $5, $0, 104
@@ -870,6 +992,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 24
 	addi $5, $0, 108
@@ -878,6 +1002,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 20
 	addi $5, $0, 112
@@ -886,6 +1012,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 16
 	addi $5, $0, 116
@@ -894,6 +1022,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 12
 	addi $5, $0, 120
@@ -902,6 +1032,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 8
 	addi $5, $0, 124
@@ -910,6 +1042,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 4
 	addi $5, $0, 128
@@ -918,6 +1052,8 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	addi $4, $0, 0
 	addi $5, $0, 132
@@ -926,8 +1062,12 @@ animacao:
 	jal delay
 	nop
 	jal shadow_porco_voltando
+	lw $13, 0($11)
+	bne $13, $0, saida_animacao
 	
 	j animacao
+#JOGO
+saida_animacao:
 #FUNÇÃO PORCO
 porco:
 	#16220
@@ -1213,6 +1353,58 @@ shadow_porco_indo:
 	addi $8, $8, 32
 	lw $10, 44368($8)
 	sw $10, 11600($8)
+	
+	jr $31
+#FUNÇÃO PARA DESENHAR O PÁSSARO
+#vermelho escuro 0x990030
+#vermelho 0xed1c24
+#amarelo 0xffc20e
+#preto 0xf
+#branco 0x0
+passaro:
+	lui $8, 0x1001
+	
+	#EQUACAO DA POSSIÇÃO
+	addi $4, $4, -1 # $4 - eixo y
+	addi $10, $0, 128
+	mul $4, $10, $4
+	add $8, $4, $5 # $5 - eixo x
+	
+	
+	addi $9, $0, 0x990030
+	sw $9, 5128($8)
+	addi $8, $8, 4
+	sw $9, 5128($8)
+	addi $8, $8, 8
+	sw $9, 5128($8)
+	addi $8, $8, 4
+	sw $9, 5128($8)
+	addi $8, $8, 4
+	sw $9, 5128($8)
+	
+	sw $9, 4612($8)
+	addi $8, $8, 4
+	addi $9, $0, 0xed1c24
+	sw $9, 4612($8)
+	addi $8, $8, 4
+	sw $9, 4612($8)
+	addi $8, $8, 4
+	addi $9, $0, 0x990030
+	sw $9, 4612($8)
+	addi $8, $8, 4
+	sw $9, 4612($8)
+	addi $8, $8, 4
+	addi $9, $0, 0xed1c24
+	sw $9, 4612($8)
+	addi $8, $8, 4
+	sw $9, 4612($8)
+	addi $8, $8, 4
+	sw $9, 4612($8)
+	addi $8, $8, 4
+	addi $9, $0, 0x990030
+	sw $9, 4612($8)
+	addi $8, $8, 4
+	sw $9, 4612($8)
 	
 	jr $31
 #FUNÇÃO DELAY
