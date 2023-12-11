@@ -1069,12 +1069,12 @@ animacao:
 #---------------------------------
 #JOGO
 saida_animacao:
-	lw $13, 0($11)
-	bne $13, $0, verificar
 	addi $4, $0, 23
 	addi $5, $0, 11
 	
 verificar:
+	bne $0, $0, fim
+	addi $11, $11, 4
 	lw $13, 0($11)
 	addi $15, $0, 'a'
 	beq $13, $15, esquerda
