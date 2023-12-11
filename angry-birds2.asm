@@ -1075,8 +1075,8 @@ saida_animacao:
 	
 verificar:
 	bne $0, $0, fim
-	lw $13, 0($11)
-	addi $11, $11, 4
+	lw $13, 4($11)
+	
 	addi $15, $0, 'a'
 	beq $13, $15, esquerda
 	
@@ -1089,35 +1089,39 @@ verificar:
 	addi $15, $0, 'w'
 	beq $13, $15, cima
 	
+	#LANÇAR PÁSSARO
+	addi $15, $0, 'l'
+	beq $13, $15, lancar
+	
 	j verificar
 	# if $5 > 33 or $4 > 32: NÃO MOVA
 esquerda:
 	jal passaro_shadow
-	addi $5, $5, -2
+	addi $4, $4, 1
+	addi $5, $5, -4
 	jal passaro
-	addi $11, $11, -4
 	j verificar
 baixo:
 	jal passaro_shadow
-	addi $4, $4, 2
+	addi $4, $4, 4
 	jal passaro
-	addi $11, $11, -4
 	j verificar
 
 direita:
 	jal passaro_shadow
-	addi $5, $5, 2
+	addi $4, $4, 1
+	addi $5, $5, 4
 	jal passaro
-	addi $11, $11, -4
 	j verificar
 	
 cima:
 	jal passaro_shadow
-	addi $4, $4, -2
+	addi $4, $4, -4
 	jal passaro
-	addi $11, $11, -4
 	j verificar
-
+	
+lancar: #PÁSSARO SE TACANDO NO PORCO
+	
 #---------------------------------
 #FUNÇÃO PORCO
 porco:
