@@ -1071,10 +1071,9 @@ animacao:
 saida_animacao:
 	addi $4, $0, 23
 	addi $5, $0, 11
-	
-	
 verificar:
 	bne $0, $0, fim
+	lui $11, 0xffff
 	lw $13, 4($11)
 	
 	addi $15, $0, 'a'
