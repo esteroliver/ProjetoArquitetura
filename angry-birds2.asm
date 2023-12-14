@@ -1074,18 +1074,67 @@ verificar:
 	lui $1, 0xffff
 	lw $13, 0($1)
 	
-	bne $13, $0, movimentos
+	bne $13, $0, estado_linha
 	
 	j verificar
 	
-movimentos:
+estado_linha:
+	addi $15, $0, 11344
+	addi $16, $0, 11272
+	slt $17, $4, $16
+	slt $18, $15, $4
+	beq $18, $17, camada_1
+	
+	addi $15, $0, 12368
+	addi $16, $0, 12296
+	slt $17, $4, $16
+	slt $18, $15, $4
+	beq $18, $17, camada_2
+	
+	addi $15, $0, 13392
+	addi $16, $0, 13320
+	slt $17, $4, $16
+	slt $18, $15, $4
+	beq $18, $17, camada_3
+	
+	addi $15, $0, 14416
+	addi $16, $0, 14344
+	slt $17, $4, $16
+	slt $18, $15, $4
+	beq $18, $17, camada_4
+camada_1:
 	addi $15, $0, 11344
 	addi $16, $0, 11272
 	slt $17, $4, $16
 	bne $17, $0, alteracoes_r4_add # se o $4 < $16
 	slt $17, $15, $4
 	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
-	
+	j movimentos
+camada_2:
+	addi $15, $0, 12368
+	addi $16, $0, 12296
+	slt $17, $4, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	slt $17, $15, $4
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	j movimentos
+camada_3:
+	addi $15, $0, 13392
+	addi $16, $0, 13320
+	slt $17, $4, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	slt $17, $15, $4
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	j movimentos
+camada_4:
+	addi $15, $0, 14416
+	addi $16, $0, 14344
+	slt $17, $4, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	slt $17, $15, $4
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	j movimentos
+movimentos:
 	lw $13, 4($1)
 	addi $15, $0, 'a'
 	beq $13, $15, esquerda
@@ -1104,12 +1153,15 @@ movimentos:
 	beq $13, $15, lancar
 	
 	j verificar
+#--------------------------------------------
+#CASO O $4 SEJA MAIOR OU MENOR DO QUE DEVERIA
 alteracoes_r4_add:
 	addi $4, $4, 8
 	j verificar
 alteracoes_r4_sub:
 	addi $4, $4, -8
 	j verificar
+#--------------------------------------------
 esquerda:
 	jal passaro_shadow
 	addi $4, $4, -8
