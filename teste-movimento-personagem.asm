@@ -1,10 +1,12 @@
 personagem:
 	addi $4, $0, 13364
 	jal passaro
-
+	addi $2, $0, 0
+	
 verificar:
 	bne $0, $0, fim
 	lui $1, 0xffff
+	add $1, $1, $2
 	lw $13, 4($1)
 	
 	addi $15, $0, 'a'
@@ -28,23 +30,27 @@ verificar:
 esquerda:
 	jal passaro_shadow
 	addi $4, $4, 8
+	addi $2, $2, 4
 	jal passaro
 	j verificar
 baixo:
 	jal passaro_shadow
 	addi $4, $4, -512
+	addi $2, $2, 4
 	jal passaro
 	j verificar
 
 direita:
 	jal passaro_shadow
 	addi $4, $4, -8
+	addi $2, $2, 4
 	jal passaro
 	j verificar
 	
 cima:
 	jal passaro_shadow
 	addi $4, $4, 512
+	addi $2, $2, 4
 	jal passaro
 	j verificar
 	
