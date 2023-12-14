@@ -1073,11 +1073,19 @@ verificar:
 	bne $0, $0, fim
 	lui $1, 0xffff
 	lw $13, 0($1)
+	
 	bne $13, $0, movimentos
 	
 	j verificar
 	
 movimentos:
+	addi $15, $0, 11344
+	addi $16, $0, 11272
+	slt $17, $4, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	slt $17, $15, $4
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	
 	lw $13, 4($1)
 	addi $15, $0, 'a'
 	beq $13, $15, esquerda
@@ -1092,11 +1100,16 @@ movimentos:
 	beq $13, $15, cima
 	
 	#LANÇAR PÁSSARO
-	addi $15, $0, 'l'
+	addi $15, $0, 13
 	beq $13, $15, lancar
 	
 	j verificar
-	# if $5 > 33 or $4 > 32: NÃO MOVA
+alteracoes_r4_add:
+	addi $4, $4, 8
+	j verificar
+alteracoes_r4_sub:
+	addi $4, $4, -8
+	j verificar
 esquerda:
 	jal passaro_shadow
 	addi $4, $4, -8
@@ -1104,27 +1117,24 @@ esquerda:
 	j verificar
 baixo:
 	jal passaro_shadow
-	addi $4, $4, 512
-
+	addi $4, $4, 1024
 	jal passaro
 	j verificar
 
 direita:
 	jal passaro_shadow
 	addi $4, $4, 8
-
 	jal passaro
 	j verificar
 	
 cima:
 	jal passaro_shadow
-	addi $4, $4, -512
-
+	addi $4, $4, -1024
 	jal passaro
 	j verificar
 	
 lancar: #PÁSSARO SE TACANDO NO PORCO #PÁSSARO SE TACANDO NO PORCO
-	
+
 #---------------------------------
 #FUNÇÃO PORCO
 porco:
@@ -1768,7 +1778,22 @@ fim_ps_linha9:
 	sw $10, 16($8)
 	
 	jr $31
+	
+#FUNÇÃO PARA CALCULAR O CAMINHO
+# Haverá vários tipos de lançamento, dependendo da altura e da distância que o personagem estiver.
+	# LANÇAMENTO 1 - $4 >= 11268 and $4 <= 11340
+	# LANÇAMENTO 2 - $4 >= 12292 and $4 <= 12364
+	# LANÇAMENTO 3 - $4 >= 13316 and $4 <= 13388
+	# LANÇAMENTO 4 - $4 >= 14340 and $4 <= 14412
+	# LANÇAMENTO 5 - $4 >= 15364 and $4 <= 15436
+	# LANÇAMENTO 6 - $4 >= 16388 and $4 <= 16460
+	# LANÇAMENTO 7 - $4 >= 17412 and $4 <= 17484
+	# LANÇAMENTO 8 - $4 >= 18436 and $4 <= 18508
+	# LANÇAMENTO 9 - $4 >= 19460 and $4 <= 19532
+	# LANÇAMENTO 10 - $4 >= 20484 and $4 <= 20556
+lancamento:
 
+	
 #FUNÇÃO DELAY
 delay:
 	addi $20, $0, 50000
