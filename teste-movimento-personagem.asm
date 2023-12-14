@@ -6,9 +6,13 @@ personagem:
 verificar:
 	bne $0, $0, fim
 	lui $1, 0xffff
-	add $1, $1, $2
-	lw $13, 4($1)
+	lw $13, 0($1)
+	bne $13, $0, movimentos
 	
+	j verificar
+	
+movimentos:
+	lw $13, 4($1)
 	addi $15, $0, 'a'
 	beq $13, $15, esquerda
 	
@@ -29,28 +33,27 @@ verificar:
 	# if $5 > 33 or $4 > 32: NÃO MOVA
 esquerda:
 	jal passaro_shadow
-	addi $4, $4, 8
-	addi $2, $2, 4
+	addi $4, $4, -8
 	jal passaro
 	j verificar
 baixo:
 	jal passaro_shadow
-	addi $4, $4, -512
-	addi $2, $2, 4
+	addi $4, $4, 512
+
 	jal passaro
 	j verificar
 
 direita:
 	jal passaro_shadow
-	addi $4, $4, -8
-	addi $2, $2, 4
+	addi $4, $4, 8
+
 	jal passaro
 	j verificar
 	
 cima:
 	jal passaro_shadow
-	addi $4, $4, 512
-	addi $2, $2, 4
+	addi $4, $4, -512
+
 	jal passaro
 	j verificar
 	
