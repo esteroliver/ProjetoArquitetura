@@ -1074,148 +1074,7 @@ verificar:
 	bne $0, $0, fim
 	lui $1, 0xffff
 	lw $13, 0($1)
-	bne $13, $0, estado_linha
-	j verificar
-	
-estado_linha:
-	addi $16, $0, 11352
-	slt $17, $4, $16
-	bne $17, $0, camada_1
-	
-	addi $16, $0, 12376
-	slt $17, $4, $16
-	bne $17, $0, camada_2
-	
-	addi $16, $0, 13400
-	slt $17, $4, $16
-	bne $17, $0, camada_3
-	
-	addi $16, $0, 14424
-	slt $17, $4, $16
-	bne $17, $0, camada_4
-	
-	addi $16, $0, 15448
-	slt $17, $4, $16
-	bne $17, $0, camada_5
-	
-	addi $16, $0, 16472
-	slt $17, $4, $16
-	bne $17, $0, camada_6
-	
-	addi $16, $0, 17496
-	slt $17, $4, $16
-	bne $17, $0, camada_7
-	
-	addi $16, $0, 18520
-	slt $17, $4, $16
-	bne $17, $0, camada_8
-	
-	addi $16, $0, 19544
-	slt $17, $4, $16
-	bne $17, $0, camada_9
-	
-	addi $16, $0, 20568
-	slt $17, $4, $16
-	bne $17, $0, camada_10
-	
-camada_1:
-	addi $15, $0, 11344
-	addi $16, $0, 11272
-	slt $17, $4, $16
-	bne $17, $0, alteracoes_r4_add # se o $4 < $16
-	slt $17, $15, $4
-	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
-	j movimentos
-	
-camada_2:
-	addi $15, $0, 12368
-	addi $16, $0, 12296
-	slt $17, $4, $16
-	bne $17, $0, alteracoes_r4_add # se o $4 < $16
-	slt $17, $15, $4
-	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
-	j movimentos
-	
-camada_3:
-	addi $15, $0, 13392
-	addi $16, $0, 13320
-	slt $17, $4, $16
-	bne $17, $0, alteracoes_r4_add # se o $4 < $16
-	slt $17, $15, $4
-	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
-	j movimentos
-	
-camada_4:
-	addi $15, $0, 14416
-	addi $16, $0, 14344
-	slt $17, $4, $16
-	bne $17, $0, alteracoes_r4_add # se o $4 < $16
-	slt $17, $15, $4
-	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
-	j movimentos
-	
-camada_5:
-	addi $15, $0, 15440
-	addi $16, $0, 15368
-	slt $17, $4, $16
-	bne $17, $0, alteracoes_r4_add # se o $4 < $16
-	slt $17, $15, $4
-	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
-	j movimentos
-	
-camada_6:
-	addi $15, $0, 16464
-	addi $16, $0, 16392
-	slt $17, $4, $16
-	bne $17, $0, alteracoes_r4_add # se o $4 < $16
-	slt $17, $15, $4
-	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
-	j movimentos
-	
-camada_7:
-	addi $15, $0, 17488
-	addi $16, $0, 17416
-	slt $17, $4, $16
-	bne $17, $0, alteracoes_r4_add # se o $4 < $16
-	slt $17, $15, $4
-	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
-	j movimentos
-	
-camada_8:
-	addi $15, $0, 18512
-	addi $16, $0, 18440
-	slt $17, $4, $16
-	bne $17, $0, alteracoes_r4_add # se o $4 < $16
-	slt $17, $15, $4
-	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
-	j movimentos
-	
-camada_9:
-	addi $15, $0, 19536
-	addi $16, $0, 19464
-	slt $17, $4, $16
-	bne $17, $0, alteracoes_r4_add # se o $4 < $16
-	slt $17, $15, $4
-	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
-	j movimentos
-	
-camada_10:
-	addi $15, $0, 20560
-	addi $16, $0, 20488
-	slt $17, $4, $16
-	bne $17, $0, alteracoes_r4_add # se o $4 < $16
-	slt $17, $15, $4
-	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
-	j movimentos
-#--------------------------------------------
-#CASO O $4 SEJA MAIOR OU MENOR DO QUE DEVERIA
-alteracoes_r4_add:
-	jal passaro_shadow
-	addi $4, $4, 8
-	j verificar
-alteracoes_r4_sub:
-	jal passaro_shadow
-	addi $4, $4, -8
+	bne $13, $0, movimentos
 	j verificar
 #--------------------------------------------
 #TECLAS DO JOGO
@@ -1264,7 +1123,17 @@ cima:
 	j verificar
 	
 lancar: #PÁSSARO SE TACANDO NO PORCO
-
+	jal lancamento
+	beq $2, 1, lancar_diag_1
+	beq $2, 2, lancar_diag_2
+	beq $2, 3, lancar_diag_3
+	beq $2, 4, lancar_diag_4
+	beq $2, 5, lancar_diag_5
+	beq $2, 6, lancar_diag_6
+	beq $2, 7, lancar_diag_7
+	beq $2, 8, lancar_diag_8
+	beq $2, 9, lancar_diag_9
+	beq $2, 10, lancar_diag_10
 #---------------------------------
 #FUNÇÃO PORCO
 porco:
@@ -1759,7 +1628,6 @@ passaro:
 	
 	jr $31
 passaro_shadow:
-
 	#POSIÇÃO DO PIXEL + 32768
 	lui $8, 0x1001
 	add $8, $8, $4
@@ -1922,8 +1790,110 @@ fim_ps_linha9:
 	# LANÇAMENTO 9 - $4 >= 19460 and $4 <= 19532
 	# LANÇAMENTO 10 - $4 >= 20484 and $4 <= 20556
 lancamento:
-
+	addi $2, $0, 0
 	
+	addi $15, $0, 11268
+	slt $17, $15, $4
+	addi $16, $0, 11344
+	slt $18, $15, $4
+	beq $17, $18, lancamento1
+	
+	addi $15, $0, 12292
+	slt $17, $15, $4
+	addi $16, $0, 12368
+	slt $18, $15, $4
+	beq $17, $18, lancamento2
+	
+	addi $15, $0, 13316
+	slt $17, $15, $4
+	addi $16, $0, 13392
+	slt $18, $15, $4
+	beq $17, $18, lancamento3
+	
+	addi $15, $0, 14340
+	slt $17, $15, $4
+	addi $16, $0, 14416
+	slt $18, $15, $4
+	beq $17, $18, lancamento4
+	
+	addi $15, $0, 15364
+	slt $17, $15, $4
+	addi $16, $0, 15440
+	slt $18, $15, $4
+	beq $17, $18, lancamento5
+	
+	addi $15, $0, 16388
+	slt $17, $15, $4
+	addi $16, $0, 16464
+	slt $18, $15, $4
+	beq $17, $18, lancamento6
+	
+	addi $15, $0, 17412
+	slt $17, $15, $4
+	addi $16, $0, 17484
+	slt $18, $15, $4
+	beq $17, $18, lancamento7
+	
+	addi $15, $0, 18436
+	slt $17, $15, $4
+	addi $16, $0, 18512
+	slt $18, $15, $4
+	beq $17, $18, lancamento8
+	
+	addi $15, $0, 19460
+	slt $17, $15, $4
+	addi $16, $0, 19536
+	slt $18, $15, $4
+	beq $17, $18, lancamento9
+	
+	addi $15, $0, 20484
+	slt $17, $15, $4
+	addi $16, $0, 20560
+	slt $18, $15, $4
+	beq $17, $18, lancamento10
+	
+	jr $31
+	
+lancamento1: 
+	addi $2, $0, 1
+	jr $31
+
+lancamento2: 
+	addi $2, $0, 2
+	jr $31
+	
+lancamento3: 
+	addi $2, $0, 3
+	jr $31
+	
+lancamento4: 
+	addi $2, $0, 4
+	jr $31
+
+lancamento5: 
+	addi $2, $0, 5
+	jr $31
+	
+lancamento6: 
+	addi $2, $0, 6
+	jr $31
+	
+lancamento7: 
+	addi $2, $0, 7
+	jr $31
+	
+lancamento8: 
+	addi $2, $0, 8
+	jr $31
+
+lancamento9: 
+	addi $2, $0, 9
+	jr $31
+	
+lancamento10: 
+	addi $2, $0, 10
+	jr $31
+		
 #FUNÇÃO DELAY
 delay:
 	addi $20, $0, 50000
