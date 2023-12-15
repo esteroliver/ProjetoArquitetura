@@ -1138,7 +1138,7 @@ lancar:
 	j verificar
 	
 lancar_diag_1:
-	addi $25, $0, 75
+	addi $25, $0, 80
 	diag_1:	
 		beq $25, $0, verificar
 		addi $25, $25, -1
@@ -1187,7 +1187,7 @@ lancar_diag_2:
 		j diag_2_3
 	lancar_diag_2_4:
 	jal passaro_shadow
-	addi $25, $0, 34
+	addi $25, $0, 39
 	diag_2_4:
 		beq $25, $0, verificar
 		addi $25, $25, -1
@@ -1275,7 +1275,7 @@ lancar_diag_3:
 		j diag_3_6
 	lancar_diag_3_7:
 	jal passaro_shadow
-	addi $25, $0, 33
+	addi $25, $0, 38
 	diag_3_7:
 		beq $25, $0, verificar
 		addi $25, $25, -1
@@ -1314,7 +1314,7 @@ lancar_diag_4:
 		j diag_4_2
 	lancar_diag_4_10:
 	jal passaro_shadow
-	addi $25, $25, 40
+	addi $25, $25, 45
 	diag_4_10:
 		beq $25, $0, verificar
 		addi $25, $25, -1
@@ -1370,7 +1370,7 @@ lancar_diag_5:
 		j diag_5_9
 	lancar_diag_5_13:
 	jal passaro_shadow
-	addi $25, $25, 24
+	addi $25, $25, 29
 	diag_5_13:
 		beq $25, $0, verificar
 		addi $25, $25, -1
@@ -1416,7 +1416,7 @@ lancar_diag_6:
 		j diag_6_2
 	lancar_diag_6_3:
 	jal passaro_shadow
-	addi $25, $0, 11
+	addi $25, $0, 16
 	diag_6_3:
 		beq $25, $0, verificar
 		addi $25, $25, -1
@@ -1427,11 +1427,153 @@ lancar_diag_6:
 		jal delay_passaro
 		j diag_6_3
 lancar_diag_7:
-
+	addi $26, $0, 12
+	lancar_diag_7_1:
+	jal passaro_shadow
+	beq $26, $0, lancar_diag_7_2
+	addi $26, $26, -1
+	addi $25, $0, 3
+	addi $6, $6, 512
+	diag_7_1:
+		beq $25, $0, lancar_diag_7_1
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_7_1
+	lancar_diag_7_2:
+	jal passaro_shadow
+	addi $25, $0, 44
+	diag_7_2:
+		beq $25, $0, verificar
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_7_2
 lancar_diag_8:
+	addi $26, $0, 8
+	lancar_diag_8_1:
+	jal passaro_shadow
+	beq $26, $0, lancar_diag_8_2_aux
+	addi $26, $26, -1
+	addi $25, $0, 2
+	addi $6, $6, 512
+	diag_8_1:
+		beq $25, $0, lancar_diag_8_1
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_8_1
+	lancar_diag_8_2_aux:
+	addi $26, $0, 6
+	lancar_diag_8_2:
+	jal passaro_shadow
+	beq $26, $0, lancar_diag_8_3
+	addi $26, $26, -1
+	addi $25, $0, 3
+	addi $6, $6, 512
+	diag_8_2:
+		beq $25, $0, lancar_diag_8_2
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_8_2
+	lancar_diag_8_3:
+	jal passaro_shadow
+	addi $25, $0, 46
+	diag_8_3:
+		beq $25, $0, verificar
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_8_3
 lancar_diag_9:
+	addi $26, $0, 12
+	lancar_diag_9_1:
+	jal passaro_shadow
+	beq $26, $0, lancar_diag_9_2_aux
+	addi $26, $26, -1
+	addi $25, $0, 2
+	addi $6, $6, 512
+	diag_9_1:
+		beq $25, $0, lancar_diag_9_1
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_9_1
+	lancar_diag_9_2_aux:
+	addi $26, $0, 4
+	lancar_diag_9_2:
+	jal passaro_shadow
+	beq $26, $0, lancar_diag_9_3
+	addi $26, $26, -1
+	addi $25, $0, 3
+	addi $6, $6, 512
+	diag_9_2:
+		beq $25, $0, lancar_diag_9_2
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_9_2
+	lancar_diag_9_3:
+	addi $25, $0, 44
+	diag_9_3:
+		beq $25, $0, verificar
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_9_3
 lancar_diag_10:
-
+	addi $26, $0, 18
+	lancar_diag_10_1:
+	jal passaro_shadow
+	beq $26, $0, lancar_diag_10_2
+	addi $26, $26, -1
+	addi $25, $0, 2
+	addi $6, $6, 512
+	diag_10_1:
+		beq $25, $0, lancar_diag_10_1
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_10_1
+	lancar_diag_10_2:
+	addi $25, $0, 44
+	diag_10_2:
+		beq $25, $0, verificar
+		addi $25, $25, -1
+		
+		jal passaro_shadows
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_10_2
 #---------------------------------
 #FUNÇÃO PORCO
 porco:
@@ -2189,7 +2331,7 @@ for_delay:
 fim_delay:
 	jr $31
 delay_passaro:
-	addi $20, $0, 7000
+	addi $20, $0, 8000
 for_delay_passaro:
 	beq $20, $0, fim_delay_passaro
 	nop
