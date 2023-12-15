@@ -1066,42 +1066,58 @@ animacao:
 	
 	j animacao
 #---------------------------------
-#	JOGO
+#	      JOGO
 saida_animacao:
 	addi $4, $0, 11308
+	
 verificar:
 	bne $0, $0, fim
 	lui $1, 0xffff
 	lw $13, 0($1)
-	
 	bne $13, $0, estado_linha
-	
 	j verificar
 	
 estado_linha:
-	addi $15, $0, 11344
-	addi $16, $0, 11272
+	addi $16, $0, 11352
 	slt $17, $4, $16
-	slt $18, $15, $4
-	beq $18, $17, camada_1
+	bne $17, $0, camada_1
 	
-	addi $15, $0, 12368
-	addi $16, $0, 12296
+	addi $16, $0, 12376
 	slt $17, $4, $16
-	slt $18, $15, $4
-	beq $18, $17, camada_2
+	bne $17, $0, camada_2
 	
-	addi $15, $0, 13392
-	addi $16, $0, 13320
+	addi $16, $0, 13400
 	slt $17, $4, $16
-	slt $18, $15, $4
-	beq $18, $17, camada_3
+	bne $17, $0, camada_3
 	
-	addi $15, $0, 14416
-	addi $16, $0, 14344
+	addi $16, $0, 14424
 	slt $17, $4, $16
-	slt $18, $15, $4
-	beq $18, $17, camada_4
+	bne $17, $0, camada_4
+	
+	addi $16, $0, 15448
+	slt $17, $4, $16
+	bne $17, $0, camada_5
+	
+	addi $16, $0, 16472
+	slt $17, $4, $16
+	bne $17, $0, camada_6
+	
+	addi $16, $0, 17496
+	slt $17, $4, $16
+	bne $17, $0, camada_7
+	
+	addi $16, $0, 18520
+	slt $17, $4, $16
+	bne $17, $0, camada_8
+	
+	addi $16, $0, 19544
+	slt $17, $4, $16
+	bne $17, $0, camada_9
+	
+	addi $16, $0, 20568
+	slt $17, $4, $16
+	bne $17, $0, camada_10
+	
 camada_1:
 	addi $15, $0, 11344
 	addi $16, $0, 11272
@@ -1110,6 +1126,7 @@ camada_1:
 	slt $17, $15, $4
 	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
 	j movimentos
+	
 camada_2:
 	addi $15, $0, 12368
 	addi $16, $0, 12296
@@ -1118,6 +1135,7 @@ camada_2:
 	slt $17, $15, $4
 	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
 	j movimentos
+	
 camada_3:
 	addi $15, $0, 13392
 	addi $16, $0, 13320
@@ -1126,6 +1144,7 @@ camada_3:
 	slt $17, $15, $4
 	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
 	j movimentos
+	
 camada_4:
 	addi $15, $0, 14416
 	addi $16, $0, 14344
@@ -1134,6 +1153,72 @@ camada_4:
 	slt $17, $15, $4
 	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
 	j movimentos
+	
+camada_5:
+	addi $15, $0, 15440
+	addi $16, $0, 15368
+	slt $17, $4, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	slt $17, $15, $4
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	j movimentos
+	
+camada_6:
+	addi $15, $0, 16464
+	addi $16, $0, 16392
+	slt $17, $4, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	slt $17, $15, $4
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	j movimentos
+	
+camada_7:
+	addi $15, $0, 17488
+	addi $16, $0, 17416
+	slt $17, $4, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	slt $17, $15, $4
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	j movimentos
+	
+camada_8:
+	addi $15, $0, 18512
+	addi $16, $0, 18440
+	slt $17, $4, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	slt $17, $15, $4
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	j movimentos
+	
+camada_9:
+	addi $15, $0, 19536
+	addi $16, $0, 19464
+	slt $17, $4, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	slt $17, $15, $4
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	j movimentos
+	
+camada_10:
+	addi $15, $0, 20560
+	addi $16, $0, 20488
+	slt $17, $4, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	slt $17, $15, $4
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	j movimentos
+#--------------------------------------------
+#CASO O $4 SEJA MAIOR OU MENOR DO QUE DEVERIA
+alteracoes_r4_add:
+	jal passaro_shadow
+	addi $4, $4, 8
+	j verificar
+alteracoes_r4_sub:
+	jal passaro_shadow
+	addi $4, $4, -8
+	j verificar
+#--------------------------------------------
+#TECLAS DO JOGO
 movimentos:
 	lw $13, 4($1)
 	addi $15, $0, 'a'
@@ -1154,14 +1239,7 @@ movimentos:
 	
 	j verificar
 #--------------------------------------------
-#CASO O $4 SEJA MAIOR OU MENOR DO QUE DEVERIA
-alteracoes_r4_add:
-	addi $4, $4, 8
-	j verificar
-alteracoes_r4_sub:
-	addi $4, $4, -8
-	j verificar
-#--------------------------------------------
+#MOVIMENTOS DO PÁSSARO
 esquerda:
 	jal passaro_shadow
 	addi $4, $4, -8
@@ -1185,7 +1263,7 @@ cima:
 	jal passaro
 	j verificar
 	
-lancar: #PÁSSARO SE TACANDO NO PORCO #PÁSSARO SE TACANDO NO PORCO
+lancar: #PÁSSARO SE TACANDO NO PORCO
 
 #---------------------------------
 #FUNÇÃO PORCO
