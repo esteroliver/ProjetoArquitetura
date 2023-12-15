@@ -401,7 +401,7 @@ for_shadow:
 	addi $8, $8, 4
 	j for_shadow
 personagem:
-	addi $4, $0, 11308
+	addi $6, $0, 11308
 	jal passaro
 animacao:
 	addi $4, $0, 0
@@ -1068,7 +1068,7 @@ animacao:
 #---------------------------------
 #	      JOGO
 saida_animacao:
-	addi $4, $0, 11308
+	addi $6, $0, 11308
 	
 verificar:
 	bne $0, $0, fim
@@ -1093,7 +1093,7 @@ movimentos:
 	beq $13, $15, cima
 	
 	#LANÇAR PÁSSARO
-	addi $15, $0, 13
+	addi $15, $0, '\n'
 	beq $13, $15, lancar
 	
 	j verificar
@@ -1101,28 +1101,29 @@ movimentos:
 #MOVIMENTOS DO PÁSSARO
 esquerda:
 	jal passaro_shadow
-	addi $4, $4, -8
+	addi $6, $6, -8
 	jal passaro
 	j verificar
 baixo:
 	jal passaro_shadow
-	addi $4, $4, 1024
+	addi $6, $6, 1024
 	jal passaro
 	j verificar
 
 direita:
 	jal passaro_shadow
-	addi $4, $4, 8
+	addi $6, $6, 8
 	jal passaro
 	j verificar
 	
 cima:
 	jal passaro_shadow
-	addi $4, $4, -1024
+	addi $6, $6, -1024
 	jal passaro
 	j verificar
 	
-lancar: #PÁSSARO SE TACANDO NO PORCO
+lancar: 
+	#PÁSSARO SE TACANDO NO PORCO
 	jal lancamento
 	beq $2, 1, lancar_diag_1
 	beq $2, 2, lancar_diag_2
@@ -1134,6 +1135,303 @@ lancar: #PÁSSARO SE TACANDO NO PORCO
 	beq $2, 8, lancar_diag_8
 	beq $2, 9, lancar_diag_9
 	beq $2, 10, lancar_diag_10
+	j verificar
+	
+lancar_diag_1:
+	addi $25, $0, 75
+	diag_1:	
+		beq $25, $0, verificar
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_1
+lancar_diag_2:
+	addi $25, $0, 8
+	diag_2_1:
+		beq $25, $0, lancar_diag_2_2
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_2_1
+	lancar_diag_2_2:
+	jal passaro_shadow
+	addi $25, $0, 16
+	addi $6, $6, 512
+	diag_2_2:
+		beq $25, $0, lancar_diag_2_3
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_2_2
+	lancar_diag_2_3:
+	jal passaro_shadow
+	addi $25, $0, 17
+	addi $6, $6, 512
+	diag_2_3:
+		beq $25, $0, lancar_diag_2_4
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_2_3
+	lancar_diag_2_4:
+	jal passaro_shadow
+	addi $25, $0, 34
+	diag_2_4:
+		beq $25, $0, verificar
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_2_4
+lancar_diag_3:
+	addi $25, $0, 4
+	diag_3_1:
+		beq $25, $0, lancar_diag_3_2
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_3_1
+	lancar_diag_3_2:
+	jal passaro_shadow
+	addi $25, $0, 8
+	addi $6, $6, 512
+	diag_3_2:
+		beq $25, $0, lancar_diag_3_3
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_3_2
+	lancar_diag_3_3:
+	jal passaro_shadow
+	addi $25, $0, 7
+	addi $6, $6, 512
+	diag_3_3:
+		beq $25, $0, lancar_diag_3_4
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_3_3
+	lancar_diag_3_4:
+	jal passaro_shadow
+	addi $25, $0, 8
+	addi $6, $6, 512
+	diag_3_4:
+		beq $25, $0, lancar_diag_3_5
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_3_4
+	lancar_diag_3_5:
+	jal passaro_shadow
+	addi $25, $0, 8
+	addi $6, $6, 512
+	diag_3_5:
+		beq $25, $0, lancar_diag_3_6
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_3_5
+	lancar_diag_3_6:
+	jal passaro_shadow
+	addi $25, $0, 7
+	addi $6, $6, 512
+	diag_3_6:
+		beq $25, $0, lancar_diag_3_7
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_3_6
+	lancar_diag_3_7:
+	jal passaro_shadow
+	addi $25, $0, 33
+	diag_3_7:
+		beq $25, $0, verificar
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_3_7
+lancar_diag_4:
+	addi $25, $0, 3
+	addi $26, $0, 6
+	diag_4_1:
+		beq $25, $0, lancar_diag_4_2
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_4_1
+	lancar_diag_4_2:
+	jal passaro_shadow
+	beq $26, $0, lancar_diag_4_10
+	addi $26, $26, -1
+	addi $25, $0, 6
+	addi $6, $6, 512
+	diag_4_2:
+		beq $25, $0, lancar_diag_4_2
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_4_2
+	lancar_diag_4_10:
+	jal passaro_shadow
+	addi $25, $25, 40
+	diag_4_10:
+		beq $25, $0, verificar
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_4_10
+lancar_diag_5:
+	addi $25, $0, 3
+	addi $26, $0,7
+	diag_5_1:
+		beq $25, $0, lancar_diag_5_2
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_5_1
+	lancar_diag_5_2:
+	jal passaro_shadow
+	beq $26, $0, lancar_diag_5_9_aux
+	addi $26, $26, -1
+	addi $25, $0, 6
+	addi $6, $6, 512
+	diag_5_2:
+		beq $25, $0, lancar_diag_5_2
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_5_2
+	lancar_diag_5_9_aux:
+	addi $26, $0, 4
+	lancar_diag_5_9:
+	jal passaro_shadow
+	beq $26, $0, lancar_diag_5_13
+	addi $26, $26, -1
+	addi $25, $0, 8
+	addi $6, $6, 512
+	diag_5_9:
+		beq $25, $0, lancar_diag_5_13
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_5_9
+	lancar_diag_5_13:
+	jal passaro_shadow
+	addi $25, $25, 24
+	diag_5_13:
+		beq $25, $0, verificar
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_5_13
+lancar_diag_6:
+	addi $26, $0, 8
+	lancar_diag_6_1:
+	jal passaro_shadow
+	beq $26, $0, lancar_diag_6_2_aux
+	addi $26, $26, -1
+	addi $25, $0, 6
+	addi $6, $6, 512
+	diag_6_1:
+		beq $25, $0, lancar_diag_6_1
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_6_1
+	lancar_diag_6_2_aux:
+	addi $26, $0, 2
+	lancar_diag_6_2:
+	jal passaro_shadow
+	beq $26, $0, lancar_diag_6_3
+	addi $26, $26, -1
+	addi $25, $0, 8
+	addi $6, $6, 512
+	diag_6_2:
+		beq $25, $0, lancar_diag_6_2
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_6_2
+	lancar_diag_6_3:
+	jal passaro_shadow
+	addi $25, $0, 11
+	diag_6_3:
+		beq $25, $0, verificar
+		addi $25, $25, -1
+		
+		jal passaro_shadow
+		addi $6, $6, 4
+		jal passaro
+		jal delay_passaro
+		j diag_6_3
+lancar_diag_7:
+
+lancar_diag_8:
+lancar_diag_9:
+lancar_diag_10:
+
 #---------------------------------
 #FUNÇÃO PORCO
 porco:
@@ -1423,13 +1721,9 @@ shadow_porco_indo:
 	
 	jr $31
 #FUNÇÃO PARA DESENHAR O PÁSSARO
-#borda 0xd67622
-#preenchimento 0xffc20e
 passaro:
 	lui $8, 0x1001
-	
-	#EQUAÇÃO
-	add $8, $4, $8
+	add $8, $6, $8
 	
 	addi $9, $0, 0xd67622
 	sw $9, 4612($8)
@@ -1443,7 +1737,7 @@ passaro:
 	sw $9, 4612($8)
 	
 	lui $8, 0x1001
-	add $8, $4, $8
+	add $8, $6, $8
 	sw $9, 4096($8)
 	addi $8, $8, 4
 	addi $9, $0, 0xffc20e
@@ -1469,7 +1763,7 @@ passaro:
 	sw $9, 4096($8)
 	
 	lui $8, 0x1001
-	add $8, $4, $8
+	add $8, $6, $8
 	sw $9, 3588($8)
 	addi $8, $8, 4
 	addi $9, $0, 0xffc20e
@@ -1495,7 +1789,7 @@ passaro:
 	sw $9, 3588($8)
 	
 	lui $8, 0x1001
-	add $8, $4, $8
+	add $8, $6, $8
 	sw $9, 3080($8)
 	addi $8, $8, 4
 	addi $9, $0, 0xffc20e
@@ -1519,7 +1813,7 @@ passaro:
 	sw $9, 3080($8)
 	
 	lui $8, 0x1001
-	add $8, $4, $8
+	add $8, $6, $8
 	sw $9, 2568($8)
 	addi $8, $8, 4
 	addi $9, $0, 0xffc20e
@@ -1546,7 +1840,7 @@ passaro:
 	sw $9, 2568($8)
 	
 	lui $8, 0x1001
-	add $8, $4, $8
+	add $8, $6, $8
 	sw $9, 2056($8)
 	addi $8, $8, 4
 	addi $9, $0, 0xffc20e
@@ -1571,7 +1865,7 @@ passaro:
 	sw $9, 2056($8)
 	
 	lui $8, 0x1001
-	add $8, $4, $8
+	add $8, $6, $8
 	sw $9, 1548($8)
 	addi $8, $8, 4
 	addi $9, $0, 0xffc20e
@@ -1592,7 +1886,7 @@ passaro:
 	addi $8, $8, 4	
 	
 	lui $8, 0x1001
-	add $8, $4, $8
+	add $8, $6, $8
 	addi $9, $0,  0xd67622
 	sw $9, 1036($8)
 	addi $8, $8, 4
@@ -1612,7 +1906,7 @@ passaro:
 	addi $8, $8, 4
 	
 	lui $8, 0x1001
-	add $8, $4, $8
+	add $8, $6, $8
 	sw $9, 532($8)
 	addi $8, $8, 4
 	sw $9, 532($8)
@@ -1620,7 +1914,7 @@ passaro:
 	sw $9, 532($8)
 	
 	lui $8, 0x1001
-	add $8, $4, $8
+	add $8, $6, $8
 	sw $9, 16($8)
 	addi $8, $8, 4
 	sw $9, 16($8)
@@ -1630,7 +1924,7 @@ passaro:
 passaro_shadow:
 	#POSIÇÃO DO PIXEL + 32768
 	lui $8, 0x1001
-	add $8, $8, $4
+	add $8, $8, $6
 	lw $10, 37380($8)
 	sw $10, 4612($8)
 	addi $8, $8, 4
@@ -1648,7 +1942,7 @@ passaro_shadow:
 	
 	addi $15, $0, 10
 	lui $8, 0x1001
-	add $8, $8, $4
+	add $8, $8, $6
 	
 ps_linha2:
 	beq $15, $0, fim_ps_linha2
@@ -1663,7 +1957,7 @@ ps_linha2:
 fim_ps_linha2:
 	addi $15, $0, 9
 	lui $8, 0x1001
-	add $8, $8, $4
+	add $8, $8, $6
 	
 ps_linha3:
 	beq $15, $0, fim_ps_linha3
@@ -1678,7 +1972,7 @@ ps_linha3:
 fim_ps_linha3:
 	addi $15, $0, 9
 	lui $8, 0x1001
-	add $8, $8, $4
+	add $8, $8, $6
 	
 ps_linha4:
 	beq $15, $0, fim_ps_linha4
@@ -1693,7 +1987,7 @@ ps_linha4:
 fim_ps_linha4:
 	addi $15, $0, 9
 	lui $8, 0x1001
-	add $8, $8, $4
+	add $8, $8, $6
 	
 ps_linha5:
 	beq $15, $0, fim_ps_linha5
@@ -1708,7 +2002,7 @@ ps_linha5:
 fim_ps_linha5:
 	addi $15, $0, 9
 	lui $8, 0x1001
-	add $8, $8, $4
+	add $8, $8, $6
 
 ps_linha6:
 	beq $15, $0, fim_ps_linha6
@@ -1723,7 +2017,7 @@ ps_linha6:
 fim_ps_linha6:
 	addi $15, $0, 7
 	lui $8, 0x1001
-	add $8, $8, $4
+	add $8, $8, $6
 	
 ps_linha7:
 	beq $15, $0, fim_ps_linha7
@@ -1738,7 +2032,7 @@ ps_linha7:
 fim_ps_linha7:
 	addi $15, $0, 7
 	lui $8, 0x1001
-	add $8, $8, $4
+	add $8, $8, $6
 	
 ps_linha8:
 	beq $15, $0, fim_ps_linha8
@@ -1753,7 +2047,7 @@ ps_linha8:
 fim_ps_linha8:
 	addi $15, $0, 3
 	lui $8, 0x1001
-	add $8, $8, $4
+	add $8, $8, $6
 	
 ps_linha9:
 	beq $15, $0, fim_ps_linha9
@@ -1767,7 +2061,7 @@ ps_linha9:
 	
 fim_ps_linha9:
 	lui $8, 0x1001
-	add $8, $8, $4
+	add $8, $8, $6
 	
 	lw $10, 32784($8)
 	sw $10, 16($8)
@@ -1779,77 +2073,67 @@ fim_ps_linha9:
 	
 #FUNÇÃO PARA CALCULAR O CAMINHO
 # Haverá vários tipos de lançamento, dependendo da altura e da distância que o personagem estiver.
-	# LANÇAMENTO 1 - $4 >= 11268 and $4 <= 11340
-	# LANÇAMENTO 2 - $4 >= 12292 and $4 <= 12364
-	# LANÇAMENTO 3 - $4 >= 13316 and $4 <= 13388
-	# LANÇAMENTO 4 - $4 >= 14340 and $4 <= 14412
-	# LANÇAMENTO 5 - $4 >= 15364 and $4 <= 15436
-	# LANÇAMENTO 6 - $4 >= 16388 and $4 <= 16460
-	# LANÇAMENTO 7 - $4 >= 17412 and $4 <= 17484
-	# LANÇAMENTO 8 - $4 >= 18436 and $4 <= 18508
-	# LANÇAMENTO 9 - $4 >= 19460 and $4 <= 19532
-	# LANÇAMENTO 10 - $4 >= 20484 and $4 <= 20556
 lancamento:
 	addi $2, $0, 0
-	
+
 	addi $15, $0, 11268
-	slt $17, $15, $4
+	slt $17, $15, $6
 	addi $16, $0, 11344
-	slt $18, $15, $4
+	slt $18, $6, $16
 	beq $17, $18, lancamento1
 	
-	addi $15, $0, 12292
-	slt $17, $15, $4
-	addi $16, $0, 12368
-	slt $18, $15, $4
+	addi $15, $0, 10244
+	slt $17, $15, $6
+	addi $16, $0, 10320
+	slt $18, $6, $16
 	beq $17, $18, lancamento2
 	
-	addi $15, $0, 13316
-	slt $17, $15, $4
-	addi $16, $0, 13392
-	slt $18, $15, $4
+	addi $15, $0, 9220
+	slt $17, $15, $6
+	addi $16, $0, 9296
+	slt $18, $6, $16
 	beq $17, $18, lancamento3
 	
-	addi $15, $0, 14340
-	slt $17, $15, $4
-	addi $16, $0, 14416
-	slt $18, $15, $4
+	addi $15, $0, 8196
+	slt $17, $15, $6
+	addi $16, $0, 8272
+	slt $18, $6, $16
 	beq $17, $18, lancamento4
 	
-	addi $15, $0, 15364
-	slt $17, $15, $4
-	addi $16, $0, 15440
-	slt $18, $15, $4
+	addi $15, $0, 7172
+	slt $17, $15, $6
+	addi $16, $0, 7248
+	slt $18, $6, $16
 	beq $17, $18, lancamento5
 	
-	addi $15, $0, 16388
-	slt $17, $15, $4
-	addi $16, $0, 16464
-	slt $18, $15, $4
+	addi $15, $0, 6148
+	slt $17, $15, $6
+	addi $16, $0, 6224
+	slt $18, $6, $16
 	beq $17, $18, lancamento6
 	
-	addi $15, $0, 17412
-	slt $17, $15, $4
-	addi $16, $0, 17484
-	slt $18, $15, $4
+	addi $15, $0, 5124
+	slt $17, $15, $6
+	addi $16, $0, 5200
+	slt $18, $6, $16
 	beq $17, $18, lancamento7
 	
-	addi $15, $0, 18436
-	slt $17, $15, $4
-	addi $16, $0, 18512
-	slt $18, $15, $4
+	addi $15, $0, 4100
+	slt $17, $15, $6
+	addi $16, $0, 4176
+	slt $18, $6, $16
 	beq $17, $18, lancamento8
 	
-	addi $15, $0, 19460
-	slt $17, $15, $4
-	addi $16, $0, 19536
-	slt $18, $15, $4
+	addi $15, $0, 3076
+	slt $17, $15, $6
+	addi $16, $0, 3152
+	slt $18, $6, $16
 	beq $17, $18, lancamento9
 	
-	addi $15, $0, 20484
-	slt $17, $15, $4
-	addi $16, $0, 20560
-	slt $18, $15, $4
+	addi $15, $0, 2052
+	slt $17, $15, $6
+	addi $16, $0, 2128
+	slt $18, $6, $16
 	beq $17, $18, lancamento10
 	
 	jr $31
@@ -1904,7 +2188,15 @@ for_delay:
 	j for_delay
 fim_delay:
 	jr $31
-	
+delay_passaro:
+	addi $20, $0, 7000
+for_delay_passaro:
+	beq $20, $0, fim_delay_passaro
+	nop
+	addi $20, $20, -1
+	j for_delay_passaro
+fim_delay_passaro:
+	jr $31
 fim:
 	addi $2, $0, 10
 	syscall
