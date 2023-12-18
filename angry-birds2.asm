@@ -1140,7 +1140,7 @@ lancar:
 lancar_diag_1:
 	addi $25, $0, 80
 	diag_1:	
-		beq $25, $0, verificar
+		beq $25, $0, fim_jogo
 		addi $25, $25, -1
 		
 		jal passaro_shadow
@@ -1189,7 +1189,7 @@ lancar_diag_2:
 	jal passaro_shadow
 	addi $25, $0, 39
 	diag_2_4:
-		beq $25, $0, verificar
+		beq $25, $0, fim_jogo
 		addi $25, $25, -1
 		
 		jal passaro_shadow
@@ -1277,7 +1277,7 @@ lancar_diag_3:
 	jal passaro_shadow
 	addi $25, $0, 38
 	diag_3_7:
-		beq $25, $0, verificar
+		beq $25, $0, fim_jogo
 		addi $25, $25, -1
 		
 		jal passaro_shadow
@@ -1316,7 +1316,7 @@ lancar_diag_4:
 	jal passaro_shadow
 	addi $25, $25, 45
 	diag_4_10:
-		beq $25, $0, verificar
+		beq $25, $0, fim_jogo
 		addi $25, $25, -1
 		
 		jal passaro_shadow
@@ -1372,7 +1372,7 @@ lancar_diag_5:
 	jal passaro_shadow
 	addi $25, $25, 29
 	diag_5_13:
-		beq $25, $0, verificar
+		beq $25, $0, fim_jogo
 		addi $25, $25, -1
 		
 		jal passaro_shadow
@@ -1418,7 +1418,7 @@ lancar_diag_6:
 	jal passaro_shadow
 	addi $25, $0, 16
 	diag_6_3:
-		beq $25, $0, verificar
+		beq $25, $0, fim_jogo
 		addi $25, $25, -1
 		
 		jal passaro_shadow
@@ -1447,7 +1447,7 @@ lancar_diag_7:
 	jal passaro_shadow
 	addi $25, $0, 44
 	diag_7_2:
-		beq $25, $0, verificar
+		beq $25, $0, fim_jogo
 		addi $25, $25, -1
 		
 		jal passaro_shadow
@@ -1493,7 +1493,7 @@ lancar_diag_8:
 	jal passaro_shadow
 	addi $25, $0, 46
 	diag_8_3:
-		beq $25, $0, verificar
+		beq $25, $0, fim_jogo
 		addi $25, $25, -1
 		
 		jal passaro_shadow
@@ -1538,7 +1538,7 @@ lancar_diag_9:
 	lancar_diag_9_3:
 	addi $25, $0, 44
 	diag_9_3:
-		beq $25, $0, verificar
+		beq $25, $0, fim_jogo
 		addi $25, $25, -1
 		
 		jal passaro_shadow
@@ -1566,10 +1566,10 @@ lancar_diag_10:
 	lancar_diag_10_2:
 	addi $25, $0, 44
 	diag_10_2:
-		beq $25, $0, verificar
+		beq $25, $0, fim_jogo
 		addi $25, $25, -1
 		
-		jal passaro_shadows
+		jal passaro_shadow
 		addi $6, $6, 4
 		jal passaro
 		jal delay_passaro
@@ -2339,6 +2339,9 @@ for_delay_passaro:
 	j for_delay_passaro
 fim_delay_passaro:
 	jr $31
+fim_jogo:
+	jal delay
+	j main
 fim:
 	addi $2, $0, 10
 	syscall
