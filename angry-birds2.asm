@@ -1069,12 +1069,162 @@ animacao:
 #	      JOGO
 saida_animacao:
 	addi $6, $0, 11308
-	
 verificar:
 	bne $0, $0, fim
 	lui $1, 0xffff
 	lw $13, 0($1)
-	bne $13, $0, movimentos
+	bne $13, $0, estado_linha
+	j verificar
+#--------------------------------------------
+# LIMITAÇÕES DO MOVIMENTO
+estado_linha:
+	addi $15, $0, 2128
+	slt $18, $6, $15
+	bne $18, $0, camada_11
+	
+	addi $15, $0, 2136
+	slt $18, $6, $15
+	bne $18, $0, camada_10
+	
+	addi $15, $0, 3160
+	slt $18, $6, $15
+	bne $18, $0, camada_9
+	
+	addi $15, $0, 4184
+	slt $18, $6, $15
+	bne $18, $0, camada_8
+	
+	addi $15, $0, 5208
+	slt $18, $6, $15
+	bne $18, $0, camada_7
+	
+	addi $15, $0, 6232
+	slt $18, $6, $15
+	bne $18, $0, camada_6
+	
+	addi $15, $0, 7256
+	slt $18, $6, $15
+	bne $18, $0, camada_5
+	
+	addi $15, $0, 8280
+	slt $18, $6, $15
+	bne $18, $0, camada_4
+	
+	addi $15, $0, 9304
+	slt $18, $6, $15
+	bne $18, $0, camada_3
+	
+	addi $15, $0, 10328
+	slt $18, $6, $15
+	bne $18, $0, camada_2
+	
+	addi $15, $0, 11352
+	slt $18, $6, $15
+	bne $18, $0, camada_1
+	
+	addi $15, $0, 11352
+	slt $18, $15, $6
+	bne $18, $0, camada_0
+	
+	j verificar
+camada_0:
+	jal passaro_shadow
+	addi $6, $6, -1024
+	jal passaro
+	j verificar
+camada_11:
+	jal passaro_shadow
+	addi $6, $6, 1024
+	jal passaro
+	j verificar
+camada_1:
+	addi $15, $0, 11344
+	addi $16, $0, 11272
+	slt $17, $15, $6
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	slt $17, $6, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	j movimentos
+camada_2:
+	addi $15, $0, 10320
+	addi $16, $0, 10240
+	slt $17, $15, $6
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	slt $17, $6, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	j movimentos
+camada_3:
+	addi $15, $0, 9296
+	addi $16, $0, 9216
+	slt $17, $15, $6
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	slt $17, $6, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	j movimentos
+camada_4:
+	addi $16, $0, 8196
+	addi $15, $0, 8272
+	slt $17, $15, $6
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	slt $17, $6, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	j movimentos
+camada_5:
+	addi $16, $0, 7172
+	addi $15, $0, 7248
+	slt $17, $15, $6
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	slt $17, $6, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	j movimentos
+camada_6:
+	addi $16, $0, 6148
+	addi $15, $0, 6224
+	slt $17, $15, $6
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	slt $17, $6, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	j movimentos
+camada_7:
+	addi $16, $0, 5124
+	addi $15, $0, 5200
+	slt $17, $15, $6
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	slt $17, $6, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	j movimentos
+camada_8:
+	addi $16, $0, 4100
+	addi $15, $0, 4176
+	slt $17, $15, $6
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	slt $17, $6, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	j movimentos
+camada_9:
+	addi $16, $0, 3076
+	addi $15, $0, 3152
+	slt $17, $15, $6
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	slt $17, $6, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	j movimentos
+camada_10:
+	addi $16, $0, 2052
+	addi $15, $0, 2128
+	slt $17, $15, $6
+	bne $17, $0, alteracoes_r4_sub # se o $4 > $15
+	slt $17, $6, $16
+	bne $17, $0, alteracoes_r4_add # se o $4 < $16
+	j movimentos
+#CASO O $4 SEJA MAIOR OU MENOR DO QUE DEVERIA
+alteracoes_r4_add:
+	jal passaro_shadow
+	addi $6, $6, 8
+	j verificar
+alteracoes_r4_sub:
+	jal passaro_shadow
+	addi $6, $6, -8
 	j verificar
 #--------------------------------------------
 #TECLAS DO JOGO
